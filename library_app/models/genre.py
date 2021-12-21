@@ -12,13 +12,14 @@ class Genre(db.Model):
         return f'Genre({self.name}, {self.description}).'
 
 
-    # def to_dict(self):
-    #     """
-    #
-    #     :return:
-    #     """
-    #     return {
-    #         'name': self.name,
-    #         'description': self.description,
-    #         'books': self.books
-    #     }
+    def to_dict(self):
+        """
+
+        :return:
+        """
+        return {
+            'name': self.name,
+            'description': self.description,
+            'unique_books': len(self.books),
+            'total_copies': sum([book.copies for book in self.books])
+        }
