@@ -8,4 +8,4 @@ class Config:
     DEBUG = True
     SECRET_KEY = 'secret key'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///library.db'
-    SQLALCHEMY_TRACK_MODIFICATION = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
