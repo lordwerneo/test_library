@@ -15,13 +15,15 @@ api = Api(api_bp)
 
 
 from .views import main
-from .rest import Index, Genres
+from .rest import Index, GenresList, GenresSolo
 
-
+# register views blueprints
 app.register_blueprint(main, url_prefix='')
 
+# register api blueprints
 api.add_resource(Index, '/')
-api.add_resource(Genres, '/genres')
+api.add_resource(GenresList, '/genres')
+api.add_resource(GenresSolo, '/genre/<string:name>')
 app.register_blueprint(api_bp, url_prefix='/api')
 
 from .models import Genre, Book

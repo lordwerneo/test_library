@@ -4,4 +4,5 @@ from . import genre_api
 
 # main_api = main_api.main_api
 Index = index_api.Index
-Genres = genre_api.Genres
+GenresList = genre_api.GenresList
+GenresSolo = genre_api.GenresSolo
