@@ -2,11 +2,11 @@ from library_app import db
 from library_app.models import Book, Genre
 
 def populate_genre():
-    genre_list = [['Fantasy', 'Fantasy is a genre of speculative fiction involving magical elements, typically set in a fictional universe and sometimes inspired by mythology and folklore.'],
-                  ['Technology', 'Genre to and explain tools, machines, techniques, crafts, systems, and methods used to solve a problem, achieve a goal, or perform a specific function. They are about the things we can create that help to make our lives easier and more efficient.'],
-                  ['History', 'A genre that is defined by its cultural and historical usage, whose features and definition are formulated from the observation of preexisting literary knowledge. The opposite of a theoretical genre.'],
-                  ['Food & Drink', 'Books in the food and drinks nonfiction genre are about the history of or the recipes to make certain foods and drinks. The food books in this genre are about the origins, types, preparations, families, and nutritional values of food.'],
-                  ['Science Fiction', 'Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.']]
+    genre_list = [['fantasy', 'Fantasy is a genre of speculative fiction involving magical elements, typically set in a fictional universe and sometimes inspired by mythology and folklore.'],
+                  ['technology', 'Genre to and explain tools, machines, techniques, crafts, systems, and methods used to solve a problem, achieve a goal, or perform a specific function. They are about the things we can create that help to make our lives easier and more efficient.'],
+                  ['history', 'A genre that is defined by its cultural and historical usage, whose features and definition are formulated from the observation of preexisting literary knowledge. The opposite of a theoretical genre.'],
+                  ['food & drink', 'Books in the food and drinks nonfiction genre are about the history of or the recipes to make certain foods and drinks. The food books in this genre are about the origins, types, preparations, families, and nutritional values of food.'],
+                  ['science fiction', 'Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.']]
 
     for genre in genre_list[:2]:
         genre_to_input = Genre(name=genre[0], description=genre[1])
@@ -41,7 +41,7 @@ def pupulate_book():
     for book in book_list:
         book_to_input = Book(isbn=book[0], title=book[1], author=book[2],
                              year=book[3], publisher=book[4], copies=book[5],
-                             genre_id=book[6])
+                             genre_id=Genre.query.get(book[6]).id)
         db.session.add(book_to_input)
         db.session.commit()
 

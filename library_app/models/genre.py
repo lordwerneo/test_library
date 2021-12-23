@@ -11,7 +11,6 @@ class Genre(db.Model):
     def __repr__(self):
         return f'Genre({self.name}, {self.description}).'
 
-
     def to_dict(self):
         """
 

@@ -15,7 +15,8 @@ api = Api(api_bp)
 
 
 from .views import main
-from .rest import Index, GenresList, GenresSolo
+from .rest import Index, GenresList, GenresSolo, BooksGenreList, BooksList, \
+    BooksSolo
 
 # register views blueprints
 app.register_blueprint(main, url_prefix='')
@@ -24,6 +25,9 @@ app.register_blueprint(main, url_prefix='')
 api.add_resource(Index, '/')
 api.add_resource(GenresList, '/genres')
 api.add_resource(GenresSolo, '/genre/<string:name>')
+api.add_resource(BooksList, '/books')
+api.add_resource(BooksGenreList, '/books/<string:genre>')
+api.add_resource(BooksSolo, '/book/<string:isbn>')
 app.register_blueprint(api_bp, url_prefix='/api')
 
 from .models import Genre, Book

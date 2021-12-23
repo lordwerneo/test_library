@@ -1,4 +1,5 @@
 from library_app import db
+from library_app.models.genre import Genre
 
 
 class Book(db.Model):
@@ -14,3 +15,18 @@ class Book(db.Model):
     def __repr__(self):
         return f'Book({self.isbn}, {self.title}, {self.author}, ' \
                f'{self.year}, {self.publisher}, {self.copies})'
+
+    def to_dict(self):
+        """
+
+        :return:
+        """
+        return {
+            'isbn': self.isbn,
+            'title': self.title,
+            'author': self.author,
+            'year': self.year,
+            'publisher': self.publisher,
+            'copies': self.copies,
+            'genre': Genre.query.get(self.genre_id).name
+        }

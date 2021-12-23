@@ -1,5 +1,4 @@
 from flask_restful import Resource, reqparse
-from library_app.models import Book, Genre
 from library_app.service import genre_service
 
 genre_args = reqparse.RequestParser()
