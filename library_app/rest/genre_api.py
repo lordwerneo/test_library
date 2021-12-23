@@ -8,13 +8,15 @@ genre_args.add_argument("description", type=str, help="Description required",
 
 
 class GenresList(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         genres = genre_service.get_all_genres()
         if genres == 'Error':
             return {'Message': 'No genres in DB'}, 200
         return {'genres': genres}
 
-    def post(self):
+    @staticmethod
+    def post():
         args = genre_args.parse_args()
         if args['name'] == '' or args['description'] == '':
             return{'Message': 'Wrong data input'}, 400
@@ -27,13 +29,15 @@ class GenresList(Resource):
 
 
 class GenresSolo(Resource):
-    def get(self, name):
+    @staticmethod
+    def get(name):
         genre = genre_service.get_genre_by_name(name)
         if genre == 'Error':
             return {'Message': 'No such genre'}, 404
         return {'genre': genre}, 200
 
-    def put(self, name):
+    @staticmethod
+    def put(name):
         args = genre_args.parse_args()
         if args['name'] == '' or args['description'] == '':
             return{'Message': 'Wrong data input'}, 400
@@ -51,7 +55,8 @@ class GenresSolo(Resource):
             return {'Message': f'Can\'t update genre {name},'
                                f'genre {args["name"]} already exist'}
 
-    def delete(self, name):
+    @staticmethod
+    def delete(name):
         genre = genre_service.delete_genre(name)
         if genre == 'Error':
             return {'Message': 'No such genre'}, 404

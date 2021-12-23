@@ -31,13 +31,15 @@ def input_validator(args):
 
 
 class BooksList(Resource):
-    def get(self):
+    @staticmethod
+    def get():
         books = book_service.get_all_books()
         if books == 'Error':
             return {'Message': 'No books in DB'}, 200
         return {'books': books}
 
-    def post(self):
+    @staticmethod
+    def post():
         args = book_args.parse_args()
         if input_validator(args):
             return {'Message': 'Wrong data input'}, 400
@@ -55,7 +57,8 @@ class BooksList(Resource):
 
 
 class BooksGenreList(Resource):
-    def get(self, genre):
+    @staticmethod
+    def get(genre):
         books = book_service.get_genre_books(genre)
         if books == 'Error':
             return {'Message': f'No books in {genre}'}, 404
@@ -65,15 +68,15 @@ class BooksGenreList(Resource):
 
 
 class BooksSolo(Resource):
-    pass
-
-    def get(self, isbn):
+    @staticmethod
+    def get(isbn):
         book = book_service.get_book_by_isbn(isbn)
         if book == 'Error':
             return {'Message': 'No such book'}, 404
         return {'book': book}, 200
 
-    def put(self, isbn):
+    @staticmethod
+    def put(isbn):
         args = book_args.parse_args()
         if input_validator(args):
             return {'Message': 'Wrong data input'}, 400
@@ -94,7 +97,8 @@ class BooksSolo(Resource):
                     'link': f'/api/book/{args["isbn"]}'}, 200
         return {'book': args, 'link': f'/api/book/{args["isbn"]}'}, 201
 
-    def delete(self, isbn):
+    @staticmethod
+    def delete(isbn):
         book = book_service.delete_book(isbn)
         if book == 'Error':
             return {'Message': 'No such book'}, 404
