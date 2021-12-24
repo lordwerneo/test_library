@@ -1,3 +1,3 @@
-from . import main
+from . import index
 
-main = main.main
+index = index.index

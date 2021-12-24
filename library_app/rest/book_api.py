@@ -44,8 +44,9 @@ class BooksList(Resource):
         if input_validator(args):
             return {'Message': 'Wrong data input'}, 400
         books = book_service.post_book(isbn=args['isbn'], title=args['title'],
-                                       author=args['author'], year=args['year']
-                                       , publisher=args['publisher'],
+                                       author=args['author'],
+                                       year=args['year'],
+                                       publisher=args['publisher'],
                                        copies=args['copies'],
                                        genre=args['genre'])
         if books == 'ISBN exists':
@@ -82,8 +83,8 @@ class BooksSolo(Resource):
             return {'Message': 'Wrong data input'}, 400
         book = book_service.put_book(cur_isbn=isbn,
                                      isbn=args['isbn'], title=args['title'],
-                                     author=args['author'], year=args['year']
-                                     , publisher=args['publisher'],
+                                     author=args['author'], year=args['year'],
+                                     publisher=args['publisher'],
                                      copies=args['copies'],
                                      genre=args['genre'])
         if book == 'No genre':
