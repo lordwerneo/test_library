@@ -10,9 +10,56 @@
     {% else %}
         <title>Library Project</title>
     {% endif %}
+    <!--CSS RESET-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/css-reset.css') }}">
+    <!--Custom CSS styles-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!--Page description-->
+    <meta name="description" content="Python Autumn 2021 final project - library by Roman Leontovych">
+    <!--Imported google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;700&display=swap" rel="stylesheet">
+    <!--Imported icons from fontawesome-->
+    <script src="https://kit.fontawesome.com/86fff67982.js" crossorigin="anonymous"></script>
 </head>
 <body>
-{% block content %}
-{% endblock %}
+    <div class="container">
+        <header>
+            <div class="nav_bar">
+                <a href="{{ url_for('index.index_page') }}" class="nav_bar_button"><i class="fas fa-home"></i></a>
+                {% if title %}
+                    <h1>{{ title }}</h1>
+                {% else %}
+                    <h1>Library App</h1>
+                {% endif %}
+                <div class="dropdown_menu">
+                    <i class="fas fa-bars nav_bar_button"></i>
+                    <div class="dropdown_content">
+
+                        <a href="api.html">API</a>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="flashes flash-{{ category }}">
+                        <span class="closebtn" onclick="this.parentElement.style.display = 'none';">&times</span>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            <a href="https://github.com/lordwerneo/epam-library"><i class="fab fa-github-square icon"></i></a>
+        </footer>
+    </div>
+
 </body>
-</html>
