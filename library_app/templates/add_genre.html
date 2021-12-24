@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="form_controls">
+        <div class="form_buttons">
+            <a href="{{ url_for('genres.genres_page') }}" class="button">Cancel</a>
+        </div>
+    </div>
+    <div class="center_form">
+        <form action="" method="POST" class="input">
+            <!--Add CSRF token-->
+            {{ form.hidden_tag() }}
+
+
+            {% if form.name.errors %}
+                {% for error in form.name.errors %}
+                    {{ form.name.label }} <br> <span style="color: red">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                {{ form.name.label }}
+            {% endif %}
+            {{ form.name }}
+
+            {{ form.description.label}}
+            {{ form.description }}
+            {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            {% endif %}
+            {{ form.submit }}
+    </div>
+{% endblock %}

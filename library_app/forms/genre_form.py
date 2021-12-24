@@ -13,7 +13,7 @@ class AddGenreForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_name(self, name):
-        name_db = Genre.query.filter_by(name=name.data).first()
+        name_db = Genre.query.filter_by(name=name.data.lower()).first()
         if name_db:
             raise ValidationError(f'Genre "{name.data}" already exists.')
         if not name.data.isalpha():
@@ -28,7 +28,7 @@ class UpdateGenreForm(AddGenreForm):
         self.original_name = original_name
 
     def validate_name(self, name):
-        name_db = Genre.query.filter_by(name=name.data).first()
+        name_db = Genre.query.filter_by(name=name.data.lower()).first()
         if name_db and name.data != self.original_name:
             raise ValidationError(f'Genre "{name.data}" already exists.')
         if not name.data.isalpha():

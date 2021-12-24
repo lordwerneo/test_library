@@ -4,52 +4,53 @@ from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, \
     NumberRange
 from library_app.models import Book
+from library_app.service.book_service import isbn_checker
 
 
-def isbn_checker(isbn):
-    """
-    Check ISBN for invalid characters, length, format and checksum.
-    """
-    # Check for invalid characters
-    if re.search(r'[\d-]+[0-9X]$', isbn).group() != isbn:
-        return 'Invalid characters'
-    # Strip of redundant characters
-    isbn_filtered = ''.join(re.findall(r'[\dX]+', isbn)) \
-        if isbn[-1] == 'X' and len(isbn) == 13 \
-        else ''.join(re.findall(r'[\d]+', isbn))
-    if len(isbn_filtered) == 10:
-        # Check for invalid format
-        if isbn.count('-') == 3:
-            checksum = 0
-            for index, value in enumerate(isbn_filtered[:-1]):
-                checksum += int(value) * (10-index)
-            checksum = 11 - (checksum % 11)
-            if checksum == 11:
-                checksum = 0
-            elif checksum == 10:
-                checksum = 'X'
-            # Check for invalid checksum
-            if str(checksum) != isbn[-1]:
-                return 'Invalid checksum'
-        else:
-            return 'Invalid format'
-    elif len(isbn_filtered) == 13:
-        # Check for invalid format
-        if isbn.count('-') == 4:
-            checksum = 0
-            for index, value in enumerate(isbn_filtered[:-1]):
-                if index % 2 == 0:
-                    checksum += int(value)
-                else:
-                    checksum += 3 * int(value)
-            checksum = 10 - checksum % 10
-            if str(checksum) != isbn[-1]:
-                return 'Invalid checksum'
-        else:
-            return 'Invalid format'
-    else:
-        return 'Invalid length'
-    return None
+# def isbn_checker(isbn):
+#     """
+#     Check ISBN for invalid characters, length, format and checksum.
+#     """
+#     # Check for invalid characters
+#     if re.search(r'[\d-]+[0-9X]$', isbn).group() != isbn:
+#         return 'Invalid characters'
+#     # Strip of redundant characters
+#     isbn_filtered = ''.join(re.findall(r'[\dX]+', isbn)) \
+#         if isbn[-1] == 'X' and len(isbn) == 13 \
+#         else ''.join(re.findall(r'[\d]+', isbn))
+#     if len(isbn_filtered) == 10:
+#         # Check for invalid format
+#         if isbn.count('-') == 3:
+#             checksum = 0
+#             for index, value in enumerate(isbn_filtered[:-1]):
+#                 checksum += int(value) * (10-index)
+#             checksum = 11 - (checksum % 11)
+#             if checksum == 11:
+#                 checksum = 0
+#             elif checksum == 10:
+#                 checksum = 'X'
+#             # Check for invalid checksum
+#             if str(checksum) != isbn[-1]:
+#                 return 'Invalid checksum'
+#         else:
+#             return 'Invalid format'
+#     elif len(isbn_filtered) == 13:
+#         # Check for invalid format
+#         if isbn.count('-') == 4:
+#             checksum = 0
+#             for index, value in enumerate(isbn_filtered[:-1]):
+#                 if index % 2 == 0:
+#                     checksum += int(value)
+#                 else:
+#                     checksum += 3 * int(value)
+#             checksum = 10 - checksum % 10
+#             if str(checksum) != isbn[-1]:
+#                 return 'Invalid checksum'
+#         else:
+#             return 'Invalid format'
+#     else:
+#         return 'Invalid length'
+#     return None
 
 
 class AddBookForm(FlaskForm):

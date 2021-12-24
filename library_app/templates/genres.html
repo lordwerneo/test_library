@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="controls">
+            <div class="form_buttons">
+                <a href="{{ url_for('genres.add_genre') }}" class="button">Add Genre</a>
+            </div>
+        </div>
+        {% if genres_list %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Unique</th>
+                    <th>Total</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for genre in genres_list %}
+                <tr>
+                    <td>{{ genre.name | title }}</td>
+                    <td>{{ genre.description | truncate(length=100, end='...')}}</td>
+                    <td>{{ genre.unique_books }}</td>
+                    <td>{{ genre.total_copies }}</td>
+                    <td><a href="{{ url_for('genres.update_genre', genre_name=genre.name) }}"><i style="color: darkgreen" class="fas fa-edit"></i></a></td>
+                    <td><a href="{{ url_for('genres.delete_genre', genre_name=genre.name) }}"><i style="color: red" class="fas fa-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+{% endblock %}
