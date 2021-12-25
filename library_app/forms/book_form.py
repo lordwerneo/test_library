@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError, \
     NumberRange
-from library_app.models import Book
+from library_app.models import Book, Genre
 from library_app.service.book_service import isbn_checker
 
 
@@ -105,3 +105,15 @@ class UpdateBookForm(FlaskForm):
                         message='Books copies should be from 1 to 999')])
     genre = SelectField('Genre', choices=[], validators=[DataRequired()])
     submit = SubmitField('Update')
+
+
+class FilterBookForm(FlaskForm):
+    message = 'Year should be from 1900 to 2022'
+    year_start = IntegerField('From', default=1900,
+                              validators=[NumberRange(min=1900, max=2022,
+                                                      message=message)])
+    year_end = IntegerField('To', default=2022,
+                            validators=[NumberRange(min=1900, max=2022,
+                                                    message=message)])
+    genre = SelectField('Genre', choices=[])
+    submit = SubmitField('Search')

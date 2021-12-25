@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="form_controls">
+    <div class="form_buttons">
+        <a href="{{ url_for('books.books_page') }}" class="button">Cancel</a>
+    </div>
+</div>
+<div class="center_form">
+    <form action="" method="POST" class="input">
+        <!--Add CSRF token-->
+        {{ form.hidden_tag() }}
+
+        {{ form.title.label }}
+        {{ form.title }}
+        {% if form.title.errors %}
+            {% for error in form.title.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.author.label }}
+        {{ form.author }}
+        {% if form.author.errors %}
+            {% for error in form.author.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.year.label }}
+        {{ form.year }}
+        {% if form.year.errors %}
+            {% for error in form.year.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.publisher.label }}
+        {{ form.publisher }}
+        {% if form.publisher.errors %}
+            {% for error in form.publisher.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.copies.label }}
+        {{ form.copies }}
+        {% if form.copies.errors %}
+            {% for error in form.copies.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+
+        {{ form.genre.label }}
+        {{ form.genre(class="select_field") }}
+
+        {{ form.submit }}
+    </form>
+</div>
+{% endblock %}

@@ -10,3 +10,4 @@ AddGenreForm = genre_form.AddGenreForm
 UpdateGenreForm = genre_form.UpdateGenreForm
 AddBookForm = book_form.AddBookForm
 UpdateBookForm = book_form.UpdateBookForm
+FilterBookForm = book_form.FilterBookForm

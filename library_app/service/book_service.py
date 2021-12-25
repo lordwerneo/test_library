@@ -67,6 +67,18 @@ def get_genre_books(genre):
     return 'Error'
 
 
+def get_filtered_books(year_start, year_end, genre):
+    books = Book.query
+    if year_start:
+        books = books.filter(Book.year >= int(year_start))
+    if year_end:
+        books = books.filter(Book.year <= int(year_end))
+    if int(genre) > 0:
+        books = books.filter(Book.genre_id == int(genre))
+    books = [book.to_dict() for book in books]
+    return books
+
+
 def post_book(isbn, title, author, year, publisher, copies, genre):
     genre_id = Genre.query.filter_by(name=genre).first()
     book = Book.query.filter_by(isbn=isbn).first()
@@ -121,16 +133,3 @@ def get_book_by_isbn(isbn):
         return book.to_dict()
     return 'Error'
 
-
-# def get_genre_total_copies(name):
-#     genre = Genre.query.filter_by(name=name)
-#     if genre:
-#         return sum([book.copies for book in genre.books])
-#     return 'Error'
-
-
-# def get_genre_unique_books(name):
-#     genre = Genre.query.filter_by(name=name)
-#     if genre:
-#         return len(genre.books)
-#     return 'Error'

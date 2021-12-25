@@ -13,10 +13,10 @@ def genres_page():
     genres_list = genre_service.get_all_genres()
     if genres_list == 'Error':
         genres_list = None
-    return render_template('genres.html', genres_list=genres_list)
+    return render_template('genres.html', genres_list=genres_list, title=title)
 
 
-@genres.route('/agg_genre', methods=['POST', 'GET'])
+@genres.route('/add_genre', methods=['POST', 'GET'])
 def add_genre():
     form = AddGenreForm()
     if form.validate_on_submit():

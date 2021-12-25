@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="controls">
+            <div class="form_buttons">
+                <a href="{{ url_for('books.add_book') }} " class="button">Add Book</a>
+            </div>
+        </div>
+        <div>
+            <form action="" method="POST" class="inline-form">
+                <!--Add CSRF token-->
+                {{ form.hidden_tag() }}
+                <div class="form_field">
+                {{ form.year_start.label }}
+                {{ form.year_start }}
+                </div>
+                <div class="form_field">
+                {{ form.year_end.label }}
+                {{ form.year_end}}
+                </div>
+                <div class="form_field">
+                {{ form.genre.label }}
+                {{ form.genre (class="select_field") }}
+                </div>
+                <div class="form_field">
+                {{ form.submit}}
+                </div>
+            </form>
+        </div>
+        </br>
+        {% if books_list %}
+            <table>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th>Publisher</th>
+                    <th>Copies</th>
+                    <th>Genre</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for book in books_list %}
+                <tr>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.year }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.copies }}</td>
+                    <td>{{ book.genre | title }}</td>
+                    <td><a href="{{ url_for('books.update_book', isbn=book.isbn) }}"><i style="color: darkgreen" class="fas fa-edit"></i></a></td>
+                    <td><a href="{{ url_for('books.delete_book', isbn=book.isbn) }}"><i style="color: red" class="fas fa-trash"></i></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+{% endblock %}

@@ -36,7 +36,8 @@ def pupulate_book():
                  ['978-9-78-968273-7', 'Digital: The New Code of Wealth', 'Joshua J Omojuwa', 2019, 'A\'Lime Media Ltd', 3, 2],
                  ['1-544-35083-X', 'Digital Leadership: Changing Paradigms for Changing Times', 'Eric C. Sheninger', 2019, 'Corwin', 5, 2],
                  ['1-46-547359-9', 'How to Be Good at Science, Technology, and Engineering', 'DK', 2018, 'DK Children', 9, 2],
-                 ['1-63-535760-8', 'The Technological Elixir', 'Ryan D Gable', 2017, 'Neely Worldwide', 1, 2]]
+                 ['1-63-535760-8', 'The Technological Elixir', 'Ryan D Gable', 2017, 'Neely Worldwide', 1, 2],
+                 ['0-76-538756-5', 'The Invisible Life of Addie LaRue', 'V.E. Schwab', 2020, 'Tor Books', 6, 1]]
 
     for book in book_list:
         book_to_input = Book(isbn=book[0], title=book[1], author=book[2],

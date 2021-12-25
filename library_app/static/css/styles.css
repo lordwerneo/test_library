@@ -225,6 +225,13 @@ td{
     font-size: 1rem;
 }
 
+td a{
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
 th,td {
     border: 2px solid black;
     padding: 5px 0;
@@ -232,6 +239,25 @@ th,td {
 
 .uppercase_font {
     text-transform: uppercase;
+}
+/*filter form*/
+.inline-form {
+    width: 94.5%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+.inline-form input[type=number], .select_field{
+    padding: 6px 10px;
+    margin: 8px auto;
+    width: auto;
+    font-size: 1.2rem;
+    border: 2px solid black;
+    display: inline-flex;
+    justify-content: flex-start;
+}
+
+.form_field {
+    margin: auto auto;
 }
 /*footer*/
 footer {

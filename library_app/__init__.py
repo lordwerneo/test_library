@@ -13,14 +13,14 @@ migrate = Migrate(app, db, directory=MIGRATION_DIR)
 api_bp = Blueprint('api', __name__)
 api = Api(api_bp)
 
-
-from .views import index, genres
+from .views import index, genres, books
 from .rest import Index, GenresList, GenresSolo, BooksGenreList, BooksList, \
     BooksSolo
 
 # register views blueprints
 app.register_blueprint(index, url_prefix='')
 app.register_blueprint(genres, url_prefix='/genres')
+app.register_blueprint(books, url_prefix='/books')
 
 # register api blueprints
 api.add_resource(Index, '/')
