@@ -1,6 +1,5 @@
-from flask import Blueprint, request, render_template, url_for, flash, redirect
-from library_app.forms import AddGenreForm, AddBookForm, UpdateGenreForm, \
-    UpdateBookForm
+from flask import Blueprint, render_template, url_for, flash, redirect
+from library_app.forms import AddGenreForm, UpdateGenreForm
 from library_app.service import genre_service
 from library_app.models import Genre
 

@@ -1,6 +1,6 @@
 from library_app import db
 
-from ..models import Genre, Book
+from ..models import Genre
 
 
 def get_all_genres():

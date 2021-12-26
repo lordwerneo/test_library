@@ -1,7 +1,6 @@
-from flask import Blueprint, request, render_template, url_for, flash, redirect
-from library_app.forms import AddGenreForm, AddBookForm, UpdateGenreForm, \
-    UpdateBookForm, FilterBookForm
-from library_app.service import genre_service, book_service
+from flask import Blueprint, render_template, url_for, flash, redirect
+from library_app.forms import AddBookForm, UpdateBookForm, FilterBookForm
+from library_app.service import book_service
 from library_app.models import Genre
 
 books = Blueprint('books', __name__)
