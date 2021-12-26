@@ -74,7 +74,7 @@ def update_book(isbn):
         if book == 'Updated':
             flash(f'Book "{form.title.data}" successfully updated.', 'success')
             return redirect(url_for('books.books_page'))
-    title = 'Update Genre'
+    title = 'Update Book'
     return render_template('update_book.html', title=title, form=form)
 
 
@@ -86,6 +86,3 @@ def delete_book(isbn):
         return redirect(url_for('books.books_page'))
     flash(f'Book  with "{isbn}" ISBN successfully deleted.', 'warning')
     return redirect(url_for('books.books_page'))
-
-
-# books = Book.query.filter(Book.year.between(2017, 2019)).filter_by(genre_id = Genre.query.filter_by(name='technology').first().id).all()
